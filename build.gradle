@@ -1,0 +1,13 @@
+apply plugin: 'java'
+
+group = 'ch.aliquis'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile("org.springframework.boot:spring-boot-starter-web:2.0.1.RELEASE")
+}
