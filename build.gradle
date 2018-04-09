@@ -1,8 +1,33 @@
-apply plugin: 'java'
+buildscript {
+    ext {
+        springBootVersion     = "2.0.1.RELEASE"
+        gradleDockerVersion   = "1.2"
+    }
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+        classpath("se.transmode.gradle:gradle-docker:${gradleDockerVersion}")
+    }
+}
 
-group = 'ch.aliquis'
-version = '0.0.1-SNAPSHOT'
-sourceCompatibility = 1.8
+apply plugin: 'java'
+apply plugin: "application"
+apply plugin: "org.springframework.boot"
+
+compileJava {
+    sourceCompatibility = 1.8
+    targetCompatibility = 1.8
+    mainClassName       = "ch.aliquis.web.Application"
+}
+
+jar {
+    baseName = "aliquis"
+    group    = "ch.aliquis"
+    version  = "0.0.1-SNAPSHOT"
+    manifest { attributes "Main-Class": "ch.aliquis.web.Application" }
+}
 
 repositories {
     mavenCentral()
@@ -10,4 +35,6 @@ repositories {
 
 dependencies {
     compile("org.springframework.boot:spring-boot-starter-web:2.0.1.RELEASE")
+    testCompile("org.springframework.boot:spring-boot-starter-test:2.0.1.RELEASE")
 }
+
